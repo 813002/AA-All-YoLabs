@@ -81,10 +81,12 @@ Mover.prototype.update = function () {//moves around
 
 Mover.prototype.loadOrbiter = function (n) {
     for (let i = 0; i < n; i++) {
+       
         let r = 10;
         let angle = (Math.PI * 2) * (i / n)
         let angVel = 0.1//Math.random() * 0.1 + 0.1;
         this.orbiters[i] = new Orbiter(this, r, "rgb(220,111, 0)", angle, angVel);
+        
     }
 }
 Mover.prototype.runOrbiter = function () {
