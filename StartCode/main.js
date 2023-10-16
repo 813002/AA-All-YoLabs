@@ -5,11 +5,12 @@ window.addEventListener("resize", resizeCanvas);
 function init(){ //setup
     canvas = document.getElementById("cnv");
     resizeCanvas(canvas);
-    context = canvas.getContext("2d");      
+    context = canvas.getContext("2d");
+    animate();      
 }
 
 function animate() { //draw  
-    setup()
+    
     context.clearRect(0,0,canvas.width,canvas.height);
     context.fillStyle = "rgb(100,100,100)";
     context.fillRect(0, 0, canvas.width, canvas.height)
