@@ -5,13 +5,14 @@ function Particles(x = 0, y = 0, r, col, lifespan){
     this.lifespan = lifespan;
     this.r = r
     this.col = col;
+    this.isDead = false;
 }
 
-Particles.prototype.run = function(){
+Particles.prototype.run = function(arr){
     this.render();
     this.update();
     this.checkEdges();
-    this.checkDead();
+    this.checkDead(arr);
 }
 
 Particles.prototype.checkEdges = function () {
@@ -35,12 +36,14 @@ Particles.prototype.update = function(){
     this.loc.add(this.vel);
     this.vel.limit(10)
     this.vel.add(this.acc);
-    this.lifespan--
+    this.lifespan--;
 }
 
-Particles.prototype.checkDead = function(){
-    if(this.lifespan === 0){
-        particles.splice(particles.indexOf(this), 1);
-        loadParticles(1);
+Particles.prototype.checkDead = function(arr){
+    if(this.lifespan <= 0){
+        console.log();
+
+        // console.log(arr)
+        arr.splice(arr.indexOf(this), 1);
     } 
 }
