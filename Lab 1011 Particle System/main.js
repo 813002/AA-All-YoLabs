@@ -22,7 +22,7 @@ function animate() {  //draw
 function loadSystem(n){
     for(let i = 0; i < n; i++){
         let x = canvas.width/2;
-        let y = canvas.height/2;
+        let y = 50;
         particleSystem[i] = new PartSyst(x, y);
     }
 }

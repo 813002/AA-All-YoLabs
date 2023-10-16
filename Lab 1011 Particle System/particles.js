@@ -8,11 +8,11 @@ function Particles(x = 0, y = 0, r, col, lifespan){
     this.isDead = false;
 }
 
-Particles.prototype.run = function(arr){
+Particles.prototype.run = function(){
     this.render();
     this.update();
-    this.checkEdges();
-    this.checkDead(arr);
+    // this.checkEdges();
+   
 }
 
 Particles.prototype.checkEdges = function () {
@@ -39,11 +39,3 @@ Particles.prototype.update = function(){
     this.lifespan--;
 }
 
-Particles.prototype.checkDead = function(arr){
-    if(this.lifespan <= 0){
-        console.log();
-
-        // console.log(arr)
-        arr.splice(arr.indexOf(this), 1);
-    } 
-}
