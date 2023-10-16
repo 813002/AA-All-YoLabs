@@ -1,19 +1,22 @@
 window.addEventListener("load", init);
-window.addEventListener("resize", resizeCanvas);
-
+let ship, planet;
 
 function init(){ //setup
     canvas = document.getElementById("cnv");
     resizeCanvas(canvas);
-    context = canvas.getContext("2d");      
+    context = canvas.getContext("2d");   
+    
+    animate();
 }
 
 function animate() { //draw  
     context.clearRect(0,0,canvas.width,canvas.height);
-    context.fillStyle = "rgb(100,100,100)";
+    context.fillStyle = "rgba(100,100,200,1)";
     context.fillRect(0, 0, canvas.width, canvas.height)
     
+    requestAnimationFrame(animate);
 }
+
 
 function resizeCanvas(){
     const pxRatio = window.devicePixelRatio || 1;
