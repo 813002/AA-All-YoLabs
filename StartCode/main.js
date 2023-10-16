@@ -14,6 +14,8 @@ function animate() { //draw
     context.clearRect(0,0,canvas.width,canvas.height);
     context.fillStyle = "rgb(100,100,100)";
     context.fillRect(0, 0, canvas.width, canvas.height)
+
+    requestAnimationFrame(animate);
     
 }
 
