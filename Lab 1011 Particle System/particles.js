@@ -1,18 +1,18 @@
-function Particles(x = 0, y = 0, r, col, lifespan){
+function Particles(x = 0, y = 0, r, col, lifespan, ranNum) {
     this.loc = new JSVector(x, y);
     this.vel = new JSVector(Math.random() * 6 - 3, Math.random() * 6 - 3);
     this.acc = new JSVector(0, 0.1);
     this.lifespan = lifespan;
     this.r = r
     this.col = col;
-    this.isDead = false;
+    this.ranNum = ranNum;
 }
 
-Particles.prototype.run = function(){
+Particles.prototype.run = function () {
     this.render();
     this.update();
     // this.checkEdges();
-   
+
 }
 
 Particles.prototype.checkEdges = function () {
@@ -24,15 +24,33 @@ Particles.prototype.checkEdges = function () {
 }
 
 Particles.prototype.render = function () { // render movers
-    context.strokeStyle = this.col;
-    context.fillStyle = this.col;
-    context.beginPath();
-    context.arc(this.loc.x, this.loc.y, this.r, Math.PI * 2, 0);
-    context.stroke();
-    context.fill();
+    let ctx = context;
+    if (this.ranNum <= 5) {
+        ctx.strokeStyle = this.col;
+        ctx.fillStyle = this.col;
+        ctx.beginPath();
+        ctx.arc(this.loc.x, this.loc.y, this.r, Math.PI * 2, 0);
+        ctx.stroke();
+        ctx.fill();
+    } else if (this.ranNum <= 10) {
+        ctx.save();
+        ctx.translate(this.loc.x, this.loc.y);
+        ctx.rotate(this.vel.getDirection() + Math.PI / 2);
+        ctx.beginPath();
+        ctx.strokeStyle = this.col;
+        ctx.fillStyle = this.col;
+        ctx.moveTo(0, -15);
+        ctx.lineTo(-5, 5);
+        ctx.lineTo(0, 0);
+        ctx.lineTo(5, 5);
+        ctx.closePath()
+        ctx.stroke();
+        ctx.fill()
+        ctx.restore();
+    }
 }
 
-Particles.prototype.update = function(){
+Particles.prototype.update = function () {
     this.loc.add(this.vel);
     this.vel.limit(10)
     this.vel.add(this.acc);
