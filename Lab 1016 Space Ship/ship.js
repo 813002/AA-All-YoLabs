@@ -1,7 +1,11 @@
 function Ship(x, y){
-    this.loc = new JSVector(x, y)
+    this.loc = new JSVector(x, y);
     this.vel = new JSVector(Math.random() * 6 - 3, Math.random() * 6 - 3);
+    this.acc = new JSVector(0, 0);
+
     this.col = "rgb(100, 150, 150)"
+    this.fl = 5;
+
 }
 
 Ship.prototype.run = function(){
@@ -11,19 +15,48 @@ Ship.prototype.run = function(){
 }
 
 Ship.prototype.render = function(){
+    let ctx = context;
+    ctx.save();
+    ctx.translate(this.loc.x, this.loc.y);
+    ctx.rotate(this.vel.getDirection() + Math.PI /2)
+    //ship render
+    ctx.beginPath();
+    ctx.strokeStyle = this.col;
+    ctx.fillStyle = this.col;
+    ctx.moveTo(0, -15)
+    ctx.lineTo(-10, 10)
+    ctx.lineTo(0, 0)
+    ctx.lineTo(10, 10)
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill();
 
-    context.beginPath();
-    context.strokeStyle = this.col;
-    context.fillStyle = this.col;
-    context.moveTo(0, -15)
-    context.lineTo(-10, 10)
-    context.lineTo(0, 0)
-    context.lineTo(10, 10)
-    context.closePath();
+    // ship flame render
+    ctx.beginPath();
+    let col = "rgba(255, 80, 5, .8)";
+    ctx.strokeStyle = col;
+    ctx.fillStyle = col;
+    ctx.moveTo(0, 15);
+    ctx.lineTo(-4, 20);
+    this.fl += Math.random() * 4 - 2;
+    if(this.fl > 90 || this.fl < 35){this.fl = 45}
+    ctx.lineTo(0, this.fl);
+    ctx.lineTo(4, 20);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill();
+    ctx.restore();
 }
 
 Ship.prototype.update = function(){
+    
+    this.acc = JSVector.subGetNew(planet.loc, this.loc)
+    this.acc.normalize()
+    this.acc.multiply(0.1)
 
+    this.vel.add(this.acc)
+  this.vel.limit(6)
+  this.loc.add(this.vel);
 }
 
 Ship.prototype.checkEdges = function(){
