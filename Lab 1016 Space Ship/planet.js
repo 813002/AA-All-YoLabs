@@ -23,13 +23,13 @@ Planet.prototype.render = function () {
 
 Planet.prototype.update = function () {
   for (let i = 0; i < 1; i++) {
-    let dist = this.loc.distance(ship.loc);
+    let dist = this.loc.distance(ship[0].loc);
     if (dist < 100) {
-      this.acc = JSVector.subGetNew(this.loc, ship.loc)
+      this.acc = JSVector.subGetNew(this.loc, ship[0].loc)
       this.acc.normalize()
       this.acc.multiply(0.01)
       this.vel.add(this.acc);
-      this.vel = ship.vel.copy();
+      this.vel = ship[0].vel.copy();
       this.vel.limit(3);
       this.loc.add(this.vel);
     }
