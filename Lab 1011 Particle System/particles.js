@@ -47,6 +47,16 @@ Particles.prototype.render = function () { // render movers
         ctx.stroke();
         ctx.fill()
         ctx.restore();
+    } else if(this.ranNum <=15){
+       
+        ctx.beginPath();
+        ctx.strokeStyle = this.col;
+        ctx.fillStyle = this.col;
+        ctx.rect(this.loc.x, this.loc.y, this.r, this.r);
+        ctx.closePath()
+        ctx.stroke();
+        ctx.fill()
+        
     }
 }
 
