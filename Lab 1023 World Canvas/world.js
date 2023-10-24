@@ -62,8 +62,12 @@ World.prototype.run = function () {
   this.ctxMain.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
   this.ctxMini.clearRect(0, 0, this.cnvMini.width, this.cnvMini.height);
   this.ctxMini.save();
-  //  <= scale world to fit in mini canvas (this.scaleX and this.scaleY)
+  this.ctxMini.scale(this.scaleX, this.scaleY);
+  
   //  center rect in the miniCanvas
+  this.ctxMini.rect(0, 0, 40, 50)
+
+
   for(let i = 0; i < this.movers.length; i++){
     this.movers[i].run();
   }
@@ -75,8 +79,8 @@ World.prototype.run = function () {
 
   // save the main context
   this.ctxMain.save();
-  this.ctxMain.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
   // translate cnvMain according to the location of the canvas in the world
+  this.ctxMain.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
   // draw the bounds of the world in cnvMain
   // Add axis in the main Canvas
   //draw x and y axes on miniMap

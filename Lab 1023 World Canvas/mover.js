@@ -39,9 +39,20 @@ Mover.prototype.checkEdges = function () {
 Mover.prototype.render = function () {
    //  render balls in world
     let ctx1 = this.ctx1;
-   
+    ctx1.strokeStyle = this.col;
+    ctx1.fillStyle = this.col;
+    ctx1.beginPath();
+    ctx1.arc(this.loc.x, this.loc.y, this.r, Math.PI * 2, 0);
+    ctx1.stroke();
+    ctx1.fill();
    //  render balls in mini map
     let ctx2 = this.ctx2;
+    ctx2.strokeStyle = this.col;
+    ctx2.fillStyle = this.col;
+    ctx2.beginPath();
+    ctx2.arc(this.loc.x, this.loc.y, this.r*0.1, Math.PI * 2, 0);
+    ctx2.stroke();
+    ctx2.fill();
    
 }
 
