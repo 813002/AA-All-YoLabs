@@ -3,7 +3,7 @@ function Ship(x, y) {
     this.vel = new JSVector(Math.random() * 6 - 3, Math.random() * 6 - 3);
     this.acc = new JSVector(0, 0);
     this.col = "rgb(100, 150, 150)"
-    this.fl = 40;
+    this.fl = 50;
 
 }
 
@@ -58,7 +58,18 @@ Ship.prototype.update = function () {
             temp.setMagnitude(0.5)
             this.acc.add(temp);
         }
+        if (dist < 15){
+            this.fl -=1;
+        }
+
     }
+
+    if(this.fl === 20){
+        this.loc.x = Math.random() * (canvas.width - 1) +1
+        this.loc.y = Math.random() * (canvas.height - 1) +1
+        this.fl = 40;
+    }
+
     let temp2 = JSVector.subGetNew(planet.loc, this.loc)
     temp2.normalize()
     temp2.multiply(0.5)
@@ -66,7 +77,10 @@ Ship.prototype.update = function () {
     this.vel.add(this.acc)
     this.vel.limit(6)
     this.loc.add(this.vel);
+
 }
+
+
 
 Ship.prototype.checkEdges = function () {
     if (this.loc.x > canvas.width) this.loc.x = 0

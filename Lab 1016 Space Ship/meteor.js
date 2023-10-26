@@ -21,7 +21,8 @@ Meteor.prototype.render = function () {
 }
 
 Meteor.prototype.update = function () {
-    
+    this.vel.limit(6);
+    this.loc.add(this.vel);
 }
 
 
