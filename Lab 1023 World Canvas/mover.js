@@ -4,7 +4,7 @@ function Mover(loc, vel, d, ctx1, ctx2, worldWidth, worldHeight) {
   this.vel = vel;
   this.acc = new JSVector(0, 0);
   this.clr = this.getRandomColor();
-  this.diam = d;
+  this.r = d;
   this.ctx1 = ctx1;
   this.ctx2 = ctx2;
   this.wWidth = worldWidth;

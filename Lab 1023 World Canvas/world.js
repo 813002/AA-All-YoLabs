@@ -65,7 +65,7 @@ World.prototype.run = function () {
   this.ctxMini.scale(this.scaleX, this.scaleY);
   
   //  center rect in the miniCanvas
-  this.ctxMini.rect(0, 0, 40, 50)
+  this.ctxMini.rect(0, 0, 40, 50)//
 
 
   for(let i = 0; i < this.movers.length; i++){
@@ -102,6 +102,8 @@ World.prototype.loadMovers = function (numMovers, ctx1, ctx2, w, h) {
     let dx = Math.random() * 2 - 1;
     let dy = Math.random() * 2 - 1;
     let vel = new JSVector(dx, dy);
+    let ctx1 = this.ctxMain
+    let ctx2 = this.ctxMini
     //each mover gets a reference to both canvas objects
     this.movers.push(new Mover(loc, vel, diam, ctx1, ctx2, w, h));
   }
