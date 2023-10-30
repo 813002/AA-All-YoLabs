@@ -79,6 +79,7 @@ World.prototype.run = function () {
 
   // save the main context
   this.ctxMain.save();
+  this.ctxMini.save();
   // translate cnvMain according to the location of the canvas in the world
   this.ctxMain.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
   // draw the bounds of the world in cnvMain
@@ -89,6 +90,8 @@ World.prototype.run = function () {
   //outline box inside of cnvMini
   //draw x and y axes on miniMap
   // restore both ctxMain and ctxMini
+  this.ctxMain.restore();
+  this.ctxMini.restore();
 }
 
 //  Load mover array
