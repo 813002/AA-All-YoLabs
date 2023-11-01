@@ -59,11 +59,11 @@ World.prototype.run = function () {
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++  run the movers
 
   this.ctxMain.save();
-  this.ctxMain.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
+  this.ctxMain.translate(this.cnvMainLoc.x*(-1), this.cnvMainLoc.y*(-1));
   this.ctxMini.clearRect(0, 0, this.cnvMini.width, this.cnvMini.height);
   this.ctxMini.save();
   this.ctxMini.scale(this.scaleX, this.scaleY);
-  
+  this.ctxMini.translate(this.dims.width/2, this.dims.height/2);
   //  center rect in the miniCanvas
   this.ctxMini.rect(0, 0, 40, 50)//
 
@@ -89,6 +89,7 @@ World.prototype.run = function () {
   //center cnvMini in world
   //outline box inside of cnvMini
   //draw x and y axes on miniMap
+  
   // restore both ctxMain and ctxMini
   this.ctxMain.restore();
   this.ctxMini.restore();
