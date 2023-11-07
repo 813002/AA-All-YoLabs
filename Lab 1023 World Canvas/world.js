@@ -62,11 +62,12 @@ World.prototype.run = function () {
   this.ctxMain.translate(this.cnvMainLoc.x*(-1), this.cnvMainLoc.y*(-1));
   this.ctxMini.clearRect(0, 0, this.cnvMini.width, this.cnvMini.height);
   this.ctxMini.save();
+
   this.ctxMini.scale(this.scaleX, this.scaleY);
+  
   this.ctxMini.translate(this.dims.width/2, this.dims.height/2);
   //  center rect in the miniCanvas
-  this.ctxMini.rect(400, 50, 400, 500)//
-
+  
 
   for(let i = 0; i < this.movers.length; i++){
     this.movers[i].run();
@@ -79,23 +80,39 @@ World.prototype.run = function () {
 
   // save the main context
   this.ctxMain.save();
-  this.ctxMini.save();
+  
+
   // translate cnvMain according to the location of the canvas in the world
   this.ctxMain.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
+
   // draw the bounds of the world in cnvMain
   
   // Add axis in the main Canvas
-
-  //draw x and y axes on miniMap
-
+  
+  
   // scale cnvMini - contain the entire world (scaleX, and scaleY)
+  this.ctxMini.save();
+  this.ctxMini.beginPath();
+  this.ctxMini.lineWidth = 30;
+  this.ctxMini.strokeStyle = "rgba(240, 52, 52, 1)";
+  this.ctxMini.scale(this.scaleX, this.scaleY);
   
   //center cnvMini in world
+  this.ctxMini.translate(this.dims.width/2, this.dims.height/2);
 
   //outline box inside of cnvMini
+  this.ctxMini.strokeStyle = "rgba(0, 0, 0, 1)"
+  this.ctxMini.strokeRect(this.cnvMainLoc.x - 400, this.cnvMainLoc.y - 300, 800, 600)
 
   //draw x and y axes on miniMap
-  
+  this.ctxMini.strokeStyle = "rgba(240, 52, 52, 1)"
+  this.ctxMini.moveTo(0, this.dims.top);
+  this.ctxMini.lineTo(0, this.dims.bottom);
+  this.ctxMini.stroke();
+  this.ctxMini.moveTo(this.dims.left, 0);
+  this.ctxMini.lineTo(this.dims.right, 0);
+  this.ctxMini.stroke();
+
   // restore both ctxMain and ctxMini
   this.ctxMain.restore();
   this.ctxMini.restore();
