@@ -67,7 +67,6 @@ World.prototype.run = function () {
   
   this.ctxMini.translate(this.dims.width/2, this.dims.height/2);
   //  center rect in the miniCanvas
-  
 
   for(let i = 0; i < this.movers.length; i++){
     this.movers[i].run();
@@ -83,7 +82,7 @@ World.prototype.run = function () {
   
 
   // translate cnvMain according to the location of the canvas in the world
-  this.ctxMain.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
+  this.ctxMain.translate(this.cnvMainLoc.x*(-1), this.cnvMainLoc.y*(-1));
   this.ctxMain.beginPath();
   this.ctxMain.lineWidth = 20;
   this.ctxMain.strokeStyle = "rgba(240, 52, 52, 1)";
@@ -96,7 +95,7 @@ World.prototype.run = function () {
   this.ctxMain.strokeStyle = "rgba(240, 52, 52, 1)"
   this.ctxMain.moveTo(0, this.dims.top);
   this.ctxMain.lineTo(0, this.dims.bottom);
-  this.ctxMain.stroke();
+  //this.ctxMain.stroke();
   this.ctxMain.moveTo(this.dims.left, 0);
   this.ctxMain.lineTo(this.dims.right, 0);
   this.ctxMain.stroke();
