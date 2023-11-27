@@ -85,12 +85,12 @@ JSVector.prototype.limit = function (lim) {
 }
 
 // Get the distance between this JSVector and another one
-JSVector.prototype.distance = function (v2) {
-  return Math.sqrt(this.distanceSquared());
+JSVector.prototype.dist = function (v2) {
+  return Math.sqrt(this.distSquared(v2));
 }
 
 // Get square of the distance between this JSVector and another one
-JSVector.prototype.distanceSquared = function (v2) {
+JSVector.prototype.distSquared = function (v2) {
   let dx = this.x - v2.x;
   let dy = this.y - v2.y;
   return (dx*dx + dy*dy)

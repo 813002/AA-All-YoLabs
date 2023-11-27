@@ -6,8 +6,8 @@ function Vehicle(loc, vel) {
   this.desiredSep = 10;//  desired separation between vehicles
   this.scl = 3;
   this.clr = "rgba(180,0,220,.8)";
-  this.maxSpeed = document.getElementById("slider2").value;  // Get slider VAlue%%%%%%%%%%%%%%%%
-  this.maxForce = document.getElementById("slider1").value;  // Get slider VAlue%%%%%%%%%%%%%%%%%
+  this.maxSpeed = document.getElementById("slider2").value;  // Get slider Value%%%%%%%%%%%%%%%%
+  this.maxForce = document.getElementById("slider1").value;  // Get slider Value%%%%%%%%%%%%%%%%%
 }
 
 //  placing methods in the prototype 
@@ -26,9 +26,10 @@ Vehicle.prototype.flock = function(vehicles) {
   let ali = this.align(vehicles);
   let coh = this.cohesion(vehicles);
   //  set multiples via sliders 
-  let sepMult = document.getElementById("slider3").value; // Get slider VAlue%%%%%%%%%%%%%%%%%%
-  let aliMult = document.getElementById("slider4").value;;  // Get slider VAlue%%%%%%%%%%%%%%%%%%
-  let cohMult = document.getElementById("slider5").value;;    // Get slider VAlue%%%%%%%%%%%%%%%%%%
+  let sepMult = document.getElementById("slider3").value; // Get slider Value%%%%%%%%%%%%%%%%%%
+  let aliMult = document.getElementById("slider4").value;;  // Get slider Value%%%%%%%%%%%%%%%%%%
+  let cohMult = document.getElementById("slider5").value;;    // Get slider Value%%%%%%%%%%%%%%%%%%
+ 
   //  calculate three forces
   sep.multiply(sepMult);
   ali.multiply(aliMult);
@@ -41,8 +42,23 @@ Vehicle.prototype.flock = function(vehicles) {
 }
 //+++++++++++++++++++++++++++++++++  Flocking functions
 Vehicle.prototype.separate = function (v) {
-  let sep = new JSVector(0,0);
-  return sep;
+  let sum = new JSVector(0,0);
+  let count = 0;
+  for (let i = 0; i < v.length; i++){
+    let dist = this.loc.dist(v[i].loc);
+    if(dist > 0 && dist < this.desiredSep){
+      let diff = JSVector.subGetNew(this.loc, v[i].loc)
+      diff.normalize();
+      // diff.divide(dist);
+      sum.add(diff);
+      count++;
+    }
+  }
+  if (count > 0) {
+    sum.divide(count);
+  }
+  
+  return sum;
 }
 
 Vehicle.prototype.align = function (v) {
