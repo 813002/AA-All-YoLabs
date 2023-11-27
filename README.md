@@ -8,3 +8,4 @@ Lab 1011 Particle System: October 11, Creates a new particle system wherever you
 Lab 1016 Space Ship: October 16, The ship is attracted to the planet, which moves away and then teleports when ship is a certain distance away.
 Lab 1023 World Canvas: October 23, Make a world bigger than a canvas.
 Lab 1107 Snakes: November 7, Made snake like object that follow previous segment in array.
+Lab 1116 Flocking: November 16, Had objects and made them have flocking properties. Includes sliders.
