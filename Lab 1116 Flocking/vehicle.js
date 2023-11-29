@@ -3,7 +3,7 @@ function Vehicle(loc, vel) {
   this.loc = new JSVector(loc.x, loc.y);
   this.vel = new JSVector(vel.x, vel.y);
   this.acc = new JSVector(0, 0);
-  this.desiredSep = 10;//  desired separation between vehicles
+  this.desiredSep = 50;//  desired separation between vehicles
   this.scl = 3;
   this.clr = "rgba(180,0,220,.8)";
   this.maxSpeed = document.getElementById("slider2").value;  // Get slider Value%%%%%%%%%%%%%%%%
@@ -49,25 +49,47 @@ Vehicle.prototype.separate = function (v) {
     if(dist > 0 && dist < this.desiredSep){
       let diff = JSVector.subGetNew(this.loc, v[i].loc)
       diff.normalize();
-      // diff.divide(dist);
+      diff.divide(dist); // might be cause of some issues
       sum.add(diff);
       count++;
     }
   }
   if (count > 0) {
     sum.divide(count);
+    sum.normalize();
+    sum.multiply(this.maxSpeed)
+    let steer = JSVector.subGetNew(sum, this.vel);
+    steer.limit(this.maxForce);
+    return steer;
   }
   
-  return sum;
+  return new JSVector();
 }
 
 Vehicle.prototype.align = function (v) {
   let steer = new JSVector(0,0);
+  let neardist = 50;
+  let count = 0;
+  for(let i = 0; i < v.length; i++){
+    let d = this.loc.dist(v[i].loc);
+    if(d > 0 && d <= neardist){
+      steer.add(v[i].vel);
+      count++;
+    }
+
+  }
+
+  if(count > 0){
+    steer.divide(count);
+  }
+
   return steer;
 }
 
 Vehicle.prototype.cohesion = function (v) {
   let coh = new JSVector(0,0);
+
+
   return coh;
 }
 
@@ -77,6 +99,8 @@ Vehicle.prototype.seek = function(target) {
   let steer = JSVector.subGetNew(desired,this.vel);
   return steer;
 }
+
+
 //+++++++++++++++++++++++++++++++++  Flocking functions
 
 Vehicle.prototype.update = function () {
