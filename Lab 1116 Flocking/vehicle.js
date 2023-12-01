@@ -81,6 +81,7 @@ Vehicle.prototype.align = function (v) {
 
   if(count > 0){
     steer.divide(count);
+    
   }
 
   return steer;
@@ -88,9 +89,24 @@ Vehicle.prototype.align = function (v) {
 
 Vehicle.prototype.cohesion = function (v) {
   let coh = new JSVector(0,0);
+  let neardist = 50;
+  let count = 0;
+  for(let i = 0; i < v.length; i++){
+    let dist = this.loc.dist(v[i].loc);
+    if(dist > 0 && dist < neardist){
+      coh.add(v[i].loc);
+      count++;
+    }
+  }
+
+  if(count > 0){
+    coh.divide(count);
+    return this.seek(coh);
+  } else {
+    return new JSVector(0,0);
+  }
 
 
-  return coh;
 }
 
 Vehicle.prototype.seek = function(target) {
