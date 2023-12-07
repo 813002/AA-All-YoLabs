@@ -22,7 +22,7 @@ PartSyst.prototype.render = function () {
 
 PartSyst.prototype.loadParticle = function (n) {
     for (let i = 0; i < n; i++) {
-        let ranNum = Math.random() * (10 - 1) + 1
+        let ranNum = Math.random() * (15 - 1) + 1
         let x = this.loc.x;
         let y = this.loc.y;
         let r = 10;

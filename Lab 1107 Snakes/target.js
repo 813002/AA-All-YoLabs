@@ -1,4 +1,4 @@
-function Planet(x, y, col) {
+function Target(x, y, col) {
   this.loc = new JSVector(x, y);
   this.vel = new JSVector(Math.random() * 2 - 1, Math.random() * 2 - 1);
   this.acc = new JSVector(0, 0);
@@ -6,13 +6,13 @@ function Planet(x, y, col) {
   this.r = 40;
 }
 
-Planet.prototype.run = function () {
+Target.prototype.run = function () {
   this.render();
   this.update();
   this.checkEdges();
 }
 
-Planet.prototype.render = function () {
+Target.prototype.render = function () {
   context.strokeStyle = this.col;
   context.fillStyle = this.col;
   context.beginPath();
@@ -21,16 +21,16 @@ Planet.prototype.render = function () {
   context.fill();
 }
 
-Planet.prototype.update = function () {
+Target.prototype.update = function () {
   for (let i = 0; i < 1; i++) {
-    let dist = this.loc.distance(ship[0].loc);
+    let dist = this.loc.distance(snake[0].loc);
     if (dist < 100) {
-      this.acc = JSVector.subGetNew(this.loc, ship[0].loc)
+      this.acc = JSVector.subGetNew(this.loc, snake[0].loc)
       this.acc.normalize()
       this.acc.multiply(0.01)
       this.vel.add(this.acc);
-      this.vel = ship[0].vel.copy();
-      this.vel.limit(3);
+      this.vel = snake[0].vel.copy();
+      this.vel.limit(1);
       this.loc.add(this.vel);
     }
 
@@ -43,7 +43,9 @@ Planet.prototype.update = function () {
 
 }
 
-Planet.prototype.checkEdges = function () {
+
+
+Target.prototype.checkEdges = function () {
   if (this.loc.x > canvas.width) this.loc.x = this.r;
   if (this.loc.x < 0) this.loc.x = canvas.width - this.r
   if (this.loc.y > canvas.height) this.loc.y = this.r;
