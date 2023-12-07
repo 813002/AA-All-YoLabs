@@ -30,19 +30,19 @@ Mover.prototype.checkEdges = function () {
 
 Mover.prototype.sizeChase = function () {
     for(let i = 0; i < movers.length; i++){
-        //if other mover is smaller than this mover, this will chase 
+        //if other mover is smaller than this mover, this will chase
         if(movers[i].r < this.r){
             this.acc = JSVector.subGetNew(movers[i].loc, this.loc)
             this.acc.normalize()
             this.acc.multiply(0.05)
-           
+
         }
         //if other mover is bigger than this mover, this will run
         if (movers[i].r > this.r){
             this.acc = JSVector.subGetNew(this.loc, movers[i].loc)
             this.acc.normalize()
             this.acc.multiply(0.05)
-            
+
         }
     }
 }
@@ -53,9 +53,9 @@ Mover.prototype.checkInside = function(){
             this.dead = true;
             // this.r += 5;
         } else if (this.loc.distance(movers[i].loc) <= this.r + movers[i].r && this.r === movers[i].r){
-            
+
         }
-        
+
     }
 }
 
@@ -74,9 +74,9 @@ Mover.prototype.update = function () {//moves around
     this.loc.add(this.vel);
     if(this.dead === true){
         movers.splice(movers.indexOf(this), 1);
-        
+
     }
-    
+
 }
 
 Mover.prototype.loadOrbiter = function (n) {
